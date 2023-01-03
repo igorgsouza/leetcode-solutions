@@ -11,38 +11,43 @@ public:
 
     vector<long long> get_possible_sums(vector<int>& nums)
     {
+        bool* selection = new bool[nums.size()]();
         vector<long long> possible;
-        long long size = nums.size();
-        for(long long pivot = 0; pivot < size; pivot++)
+        long long significant = 0;
+        while(significant < nums.size())
         {
-            //cout << "pivot: " << pivot<< endl; 
-            for(long long count = 0; count < size - pivot; count++)
+            vector<int> subsequence;
+            for(int i = 0; i <= significant; i++)
             {
-                //cout << "count: " << count<< endl; 
-                for(long long add_pivot = pivot+1; add_pivot <= size - count; add_pivot++)
-                {
-                    //cout << "add_pivot: " << add_pivot<< endl; 
-                    vector<int> subsequence;
-                    subsequence.push_back(nums[pivot]);
-                    for(long long iterator = 0; iterator < count; iterator++)
-                    {
-                        //cout << "iterator: " << iterator << endl; 
-                        subsequence.push_back(nums[add_pivot + iterator]);
-                    }
-                    for(int i = 0; i < subsequence.size(); ++i)
-                    {
-                        cout<<subsequence[i] << " ";
-                    }
-                    cout << "=" <<get_sum(subsequence);
-                    cout << endl;
+                if(*(selection + i))
+                    subsequence.push_back(nums[i]);
+            }
+            possible.push_back(get_sum(subsequence));
+            ///
 
-                    possible.push_back(get_sum(subsequence));
-                    if(count == 0)
-                        break;
+            for(int i = 0; i <= significant; ++i)
+            {
+                cout << *(selection + i);
+            }       
+            cout << endl;     
+
+            ///
+            for(int i = 0; i <= significant; ++i)
+            {
+                if(!*(selection + i))
+                {
+                    *(selection + i) = true;
+                    break;
                 }
+                *(selection + i) = false;
+            }
+            if(!*(selection + significant))
+            {
+                significant++;
+                if(significant < nums.size())
+                    *(selection + significant) = true;
             }
         }
-        possible.push_back(0);
         return possible;
     }
 

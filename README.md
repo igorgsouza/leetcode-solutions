@@ -8,7 +8,7 @@ The naming convention on the files are as follows:
 
 ###### [STATUS][DIFFICULTY]challenge_id
 
-#### Status Range
+#### STATUS
 - WIP : Currently working on a solution
 - SOLVED : Found a solution
 - PASS : Passed the challenge to work on it later

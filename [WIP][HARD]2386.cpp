@@ -1,3 +1,5 @@
+//RUNTIME n/a
+//MEMORY n/a
 class Solution {
 public:
     long long kSum(vector<int>& nums, int k) {
